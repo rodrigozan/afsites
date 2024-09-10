@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sua Renda Em Casa</title>
+    <style>
+        /* Reset básico para manter a consistência */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body,
+        html {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .container {
+            margin: 0 auto;
+            padding: 0;
+            width: 80%;
+        }
+
+        /* Header com centralização e gradiente */
+        header {
+            text-align: center;
+            background: url('https://suarendadigitalemcasa.com.br/wp-content/uploads/2023/11/bg01.webp') no-repeat center center;
+            background-size: cover;
+            padding: 100px 20px;
+            color: #ffffff;
+        }
+
+        header img {
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* Gradiente específico nas frases */
+        .highlight-orange-yellow {
+            background: linear-gradient(to right, #ff4500, #ffd700);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        h6 {
+            font-size: 1rem;
+            text-transform: uppercase;
+            display: none;
+        }
+
+        /* Estilo do vídeo incorporado */
+        .video-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .videos-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 40px;
+        }
+
+        .videos-container iframe {
+            width: calc(50% - 2rem);
+            /* Ajuste a largura para permitir margem */
+            max-width: 640px;
+            height: 360px;
+            margin: 1rem;
+            box-sizing: border-box;
+            /* Inclui a margem e o padding no cálculo da largura */
+        }
+
+        @media (max-width: 768px) {
+            .videos-container iframe {
+                height: 200px;
+            }
+        }
+
+        iframe {
+            width: 100%;
+            max-width: 45rem;
+            height: 27.5rem;
+        }
+
+        /* Botão customizado com bordas arredondadas e gradiente */
+        .cta-button {
+            display: inline-block;
+            text-transform: uppercase;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(to right, #ff4500, #ffd700);
+            color: #ffffff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Animação da seta */
+        .arrow-down {
+            margin-top: 20px;
+            font-size: 2rem;
+            color: #ffffff;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Seção de imagens com legendas */
+        .image-section {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #ffffff;
+        }
+
+        .image-section h2 {
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+
+        .image-gallery {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .image-gallery div {
+            flex: 1;
+            margin: 10px;
+            max-width: 300px;
+        }
+
+        .image-gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .image-gallery p {
+            margin-top: 10px;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        #teachers-section .image-gallery div {
+            flex: 1;
+            margin: 10px;
+            max-width: 500px;
+            text-align: left;
+        }
+
+        /* Seção de ícones e títulos */
+        .icon-section {
+            background-color: #f0f0f0;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .icon-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .icon-col {
+            flex: 1;
+            max-width: 250px;
+            height: 200px;
+            margin: 0 10px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .icon-col i {
+            font-size: 2.5rem;
+            color: #ff4500;
+            /* Cor dos ícones */
+            margin-bottom: 10px;
+        }
+
+        .icon-col h5 {
+            font-size: 1.5rem;
+            color: #333;
+            margin: 0;
+            margin-top: 1.5rem;
+        }
+
+        .icon-col:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+            opacity: 0;
+            padding: 0 10px;
+        }
+
+        .faq-content.open {
+            max-height: 1000px;
+            /* Valor grande o suficiente para a maioria dos conteúdos */
+            opacity: 1;
+            padding: 10px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script> <!-- Fonte de ícones -->
+</head>
+
+<main>
+
+    <header>
+        <div class="container">
+            <img src="https://suarendadigitalemcasa.com.br/wp-content/uploads/2023/11/logo.svg" alt="Sua Renda em Casa">
+            <h1>
+                Se você <span class="highlight-orange-yellow">não fizer uma nova renda</span> digital em 1 mês, devolvo
+                seu dinheiro e <span class="highlight-orange-yellow">ainda te dou 100 reais no pix.</span>
+            </h1>
+            <h6>sem precisar aparecer</h6>
+
+            <!-- Vídeo do YouTube -->
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/kq8K_CYZXGU" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+
+            <!-- Botão de ação -->
+            <a href="https://pay.kiwify.com.br/sUqnazH?afid=zRLalql4" class="cta-button">Comece agora</a>
+
+            <!-- Seta animada -->
+            <div class="arrow-down">↓</div>
+        </div>
+    </header>
+
+    <!-- Próxima seção de imagens -->
+    <section class="image-section" id="proxima-section">
+        <h2>Com o treinamento você conseguirá</h2>
+        <div class="image-gallery">
+            <div>
+                <img src="https://suarendadigitalemcasa.com.br/wp-content/uploads/2024/02/financeira.webp"
+                    alt="Sua Renda Em Casa - Nunca mais seja escravo das finanças, faça ela trabalhar para você.">
+                <p>Nunca mais seja escravo das finanças, faça ela trabalhar para você.</p>
+            </div>
+            <div>
+                <img src="https://suarendadigitalemcasa.com.br/wp-content/uploads/2024/02/geografica.webp"
+                    alt="Sua Renda Em Casa - Viva e trabalhe em qualquer lugar do mundo, sem restrições!">
+                <p>Viva e trabalhe em qualquer lugar do mundo, sem restrições!</p>
+            </div>
+            <div>
+                <img src="https://suarendadigitalemcasa.com.br/wp-content/uploads/2024/02/tempo.webp"
+                    alt="Sua Renda Em Casa - Nunca mais bata cartão e cumpra horário, seu negócio, suas regras!">
+                <p>Nunca mais bata cartão e cumpra horário, seu negócio, suas regras!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Próxima seção com ícones e títulos -->
+    <section class="icon-section">
+        <div class="icon-row container">
+            <div class="icon-col">
+                <i class="fas fa-laptop"></i>
+                <h5>Assista às aulas de onde quiser</h5>
+            </div>
+            <div class="icon-col">
+                <i class="fas fa-money-bill-wave"></i>
+                <h5>Receba suporte exclusivo todos os dias</h5>
+            </div>
+            <div class="icon-col">
+                <i class="fas fa-clock"></i>
+                <h5>O passo a passo para vender todos os dias</h5>
+            </div>
+        </div>
+        <div class="icon-row container">
+            <div class="icon-col">
+                <i class="fas fa-chart-line"></i>
+                <h5>Estratégias para resultados rápidos</h5>
+            </div>
+            <div class="icon-col">
+                <i class="fas fa-users"></i>
+                <h5>Certificado de conclusão</h5>
+            </div>
+            <div class="icon-col">
+                <i class="fas fa-star"></i>
+                <h5>Acompanhamento até os resultados</h5>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção: O que você vai receber no treinamento -->
+    <section style="background-color: black; color: #ffffff; text-align: center; padding: 50px 20px;">
+        <div class="container">
+            <h2 style="text-align: center; font-size:3rem; margin-bottom: 40px;">
+                Aqui está tudo o que você vai <br />receber no treinamento</h2>
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+                <div style="position: relative; max-width: 45%; margin-bottom: 20px;">
+                    <img src="https://suarendadigitalemcasa.com.br/wp-content/uploads/2024/02/01-1.webp"
+                        alt="Sua Renda em Casa - SAINDO DO ZERO (Explicativo)"
+                        style="width: 100%; border-radius: 10px;">
+                    <h2 style="color: yellow; margin-top: 10px;">SAINDO DO ZERO <br>(Explicativo)</h2>
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                        <i class="fas fa-play-circle" style="font-size: 10rem; color: rgba(255, 255, 255, 0.2);"></i>
+                    </div>
+                    <p>Aqui você irá ficar por dentro de tudo o que você precisa fazer para sair do absoluto zero.</p>
+                </div>
+                <div style="position: relative; max-width: 45%; margin-bottom: 20px;">
+                    <img src="https://suarendadigitalemcasa.com.br/wp-content/uploads/2024/02/02-1.webp"
+                        alt="Sua Renda em Casa - ENTENDENDO O MERCADO" style="width: 100%; border-radius: 10px;">
+                    <h2 style="color: yellow; margin-top: 10px;">ENTENDENDO O MERCADO</h2>
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                        <i class="fas fa-play-circle" style="font-size: 10rem; color: rgba(255, 255, 255, 0.2);"></i>
+                    </div>
+                    <p>Entenda como funciona o mercado digital e como você vai poder viver dele!</p>
+                </div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+                <div style="position: relative; max-width: 45%; margin-bottom: 20px;">
+                    <img src="https://suarendadigitalemcasa.com.br/wp-content/uploads/2024/02/03-1.webp"
+                        alt="Sua REnda em Casa - COMO TER UMA NOVA PROFISSÃO PELO CELULAR"
+                        style="width: 100%; border-radius: 10px;">
+                    <h2 style="color: yellow; margin-top: 10px;">COMO TER UMA NOVA PROFISSÃO PELO CELULAR</h2>
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                        <i class="fas fa-play-circle" style="font-size: 10rem; color: rgba(255, 255, 255, 0.2);"></i>
+                    </div>
+                    <p>Aqui você vai aprender com todo passo a passo uma nova profissão e poder fazer pelo celular.</p>
+                </div>
+                <div style="position: relative; max-width: 45%; margin-bottom: 20px;">
+                    <img src="https://suarendadigitalemcasa.com.br/wp-content/uploads/2024/02/04-1.webp"
+                        alt="Sua Renda em Casa - MEU PRIMEIRO CLIENTE EM 24 HORAS"
+                        style="width: 100%; border-radius: 10px;">
+                    <h2 style="color: yellow; margin-top: 10px;">MEU PRIMEIRO CLIENTE EM 24 HORAS</h2>
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                        <i class="fas fa-play-circle" style="font-size: 10rem; color: rgba(255, 255, 255, 0.2);"></i>
+                    </div>
+                    <p>Aprenda como ter seu primeiro cliente e colocar dinheiro no bolso em 24 horas</p>
+                </div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+                <div style="position: relative; max-width: 45%; margin-bottom: 20px;">
+                    <img src="https://suarendadigitalemcasa.com.br/wp-content/uploads/2024/02/05.webp"
+                        alt="Sua Renda em Casa - COMO FAZER OS SERVIÇOS DIGITAIS (PASSO A PASSO)"
+                        style="width: 100%; border-radius: 10px;">
+                    <h2 style="color: yellow; margin-top: 10px;">COMO FAZER OS SERVIÇOS DIGITAIS (PASSO A PASSO)</h2>
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                        <i class="fas fa-play-circle" style="font-size: 10rem; color: rgba(255, 255, 255, 0.2);"></i>
+                    </div>
+                    <p>Como realizar os serviços na internet que te pagarão muito bem!</p>
+                </div>
+                <div style="position: relative; max-width: 45%; margin-bottom: 20px;">
+                    <img src="https://suarendadigitalemcasa.com.br/wp-content/uploads/2024/02/06.webp"
+                        alt="Sua Renda em Casa - VENDENDO TODOS OS DIAS E CONQUISTANDO A LIBERDADE"
+                        style="width: 100%; border-radius: 10px;">
+                    <h2 style="color: yellow; margin-top: 10px;">VENDENDO TODOS OS DIAS E CONQUISTANDO A LIBERDADE</h2>
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                        <i class="fas fa-play-circle" style="font-size: 10rem; color: rgba(255, 255, 255, 0.2);"></i>
+                    </div>
+                    <p>Aqui você estará pronto e vender todos os dias!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção: O treinamento é para você -->
+    <section style="background-color: #ffffff; padding: 50px 20px;">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="max-width: 45%;">
+                    <h2 style="text-transform: uppercase;font-size: 2rem;">O treinamento <strong>Sua Renda Em
+                            Casa</strong> foi feito
+                        para
+                        você!</h2>
+                    <h2 style="font-size: 2rem; margin-top: 1rem;"><strong>Não importa a sua:</strong></h2>
+                </div>
+                <div style="max-width: 45%;">
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="font-weight: bold; color: orange;font-size: 2rem;margin-bottom:5rem;">
+                            <h3><i class="fas fa-user"></i> Idade</h3>
+                        </li>
+                        <li style="font-weight: bold; color: orange;font-size: 2rem;margin-bottom:5rem;">
+                            <h3><i class="fas fa-book"></i> Escolaridade</h3>
+                        </li>
+                        <li style="font-weight: bold; color: orange;font-size: 2rem;margin-bottom:5rem;">
+                            <h3><i class="fas fa-tools"></i> Experiência</h3>
+                        </li>
+                    </ul>
+                    <p style="color: #003366;">O Objetivo do treinamento é justamente te ensinar, você vai aprender tudo
+                        do
+                        absolutamente zero!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção: O que a mídia fala -->
+    <section style="background-color: black; color: #ffffff; padding: 50px 20px;">
+        <h2
+            style="text-align: center; font-size: 2rem; margin-bottom: 2rem; text-transform: uppercase; background: linear-gradient(to right, #ff4500, #ffd700); -webkit-background-clip: text; color: transparent;">
+            O que a mídia fala do marketing digital e de nós</h2>
+        <div style="display: flex; justify-content: space-around; margin-top: 40px;">
+            <iframe src="https://www.youtube.com/embed/q6AJJoEDSsM" frameborder="0" style="width: 30%; height: 200px;"
+                allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/kxTPQ0wYC-k" frameborder="0" style="width: 30%; height: 200px;"
+                allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/CBuw-Oyq7tA" frameborder="0" style="width: 30%; height: 200px;"
+                allowfullscreen></iframe>
+        </div>
+        <div style="display: flex; justify-content: space-around; margin-top: 40px;">
+            <img src="https://suarendadigitalemcasa.com.br/wp-content/uploads/2024/02/NOTICIA-1-1024x646.webp"
+                alt="Notícia 1 - Sua Renda em Casa" style="width: 45%; border-radius: 10px;">
+            <img src="https://suarendadigitalemcasa.com.br/wp-content/uploads/2024/02/NOTICIA-2-1024x646.webp"
+                alt="Notícia 2 - Sua Renda em Casa" style="width: 45%; border-radius: 10px;">
+        </div>
+    </section>
+
+    <!-- Seção: Bônus Exclusivos -->
+    <section style="background-color: #f5f5f5; padding: 50px 20px;">
+        <div class="container">
+            <div style="background-color: #ffffff; border-radius: 10px; padding: 40px;">
+                <h2 style="font-size: 4rem; text-align: center; color: black;">Bônus exclusivos para acelerar seus
+                    resultados:</h2>
+                <hr>
+                <div style="margin-top:2rem">
+                    <img src="https://suarendadigitalemcasa.com.br/wp-content/uploads/2024/02/mok07.webp"
+                        alt="Sua Renda em Casa - Bônus 1" style="border-radius: 10px;">
+                    <div style="margin:2rem">
+                        <h3 style="font-size:2rem; margin: 2rem 0;">BÔNUS ESPECIAL #01</h3>
+                        <p style="font-size:1.3rem; margin: 2rem 0;">Aulas ao vivo 3 vezes por semana</p>
+                        <p style="color: red;font-size:2rem; margin: 2rem 0;">De <span
+                                style="text-decoration: line-through;">R$ 2.000</span> por zero
+                        </p>
+                    </div>
+                </div>
+                <hr>
+                <div style="margin-top:2rem;">
+                    <img src="https://suarendadigitalemcasa.com.br/wp-content/uploads/2024/02/01.webp"
+                        alt="Sua Renda em Casa - Bônus 2" style="border-radius: 10px;">
+                    <div style="margin:2rem;">
+                        <h3 style="font-size:2rem; margin: 2rem 0;">BÔNUS ESPECIAL #02</h3>
+                        <p style="font-size:1.3rem; margin: 2rem 0;;font-weight: bold;">“Aprenda o caminho para fechar
+                            seus primeiros clientes em tempo recorde”</p>
+                        <p style="font-size:1.3rem; margin: 2rem 0;">Você quer ter clientes que te pagam todos os meses
+                            prestando serviços? </p>
+                        <p style="font-size:1.3rem; margin: 2rem 0;">Neste bônus você entenderá como fechar cada vez
+                            mais clientes em tempo recorde. </p>
+                        <p style="color: red;font-size:2rem; margin: 2rem 0;">De <span
+                                style="text-decoration: line-through;">R$ 97,00</span> por zero
+                        </p>
+                    </div>
+                </div>
+                <hr>
+                <div style="text-align: center;margin: 2rem 0">
+                    <h3>Para ter acesso a todos esses bônus, você investiria no total:</h3>
+                    <button
+                        style="margin: 2rem 0;width: 100%; padding: 15px; background-color: #ff4500; color: #ffffff; font-size: 1.2rem; border: none; border-radius: 10px;">
+                        Valor total: <span style="text-decoration: line-through;">R$ 2.097,00</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção: Oferta Final -->
+    <section style="font-size: 2rem; background-color: black; color: #ffffff; text-align: center; padding: 50px 20px;">
+        <h2 style="text-transform: uppercase;">Sua renda<br><span
+                style="background: linear-gradient(to right, #ff4500, #ffd700); -webkit-background-clip: text; color: transparent;">em
+                casa</span></h2>
+        <p style="margin:2rem 0">De <span style="text-decoration: line-through;">R$ 3.997,00</span> por apenas</p>
+        <p style="margin:2rem 0; font-size:2rem">12x de <span style="font-size: 3rem;">R$ 9,74</span></p>
+        <p style="margin:2rem 0">Ou R$ 97,00 à vista!</p>
+        <a href="https://pay.kiwify.com.br/sUqnazH?afid=zRLalql4"
+            style="text-decoration: none; padding: 15px 30px; background: linear-gradient(to left, #006400, #00ff00); color: #ffffff; font-size: 1.2rem; border: none; border-radius: 50px; position: relative; overflow: hidden;">
+            Comece agora
+            <span
+                style="position: absolute; top: 0; right: 0; bottom: 0; width: 100%; background-color: rgba(0, 0, 0, 0.3); transform: translateX(100%); transition: transform 0.5s;"></span>
+        </a>
+    </section>
+
+    <!-- Section: professores -->
+    <section class="image-section" id="teachers-section">
+        <h2>ESSES SÃO SEUS PROFESSORES</h2>
+        <div class="image-gallery">
+            <div>
+                <img src="https://suarendadigitalemcasa.com.br/wp-content/uploads/2024/02/Thiago-Hora.webp"
+                    alt="Sua Renda Em Casa - Thiago Hora">
+                <p><strong><em>Empresário</em></strong><br> <strong></strong>Criador do Sua Renda em Casa</strong> que
+                    fatura múltiplos 6 dígitos ao mês com a venda de produtos físicos, digitais e serviços</p>
+            </div>
+            <div>
+                <img src="https://suarendadigitalemcasa.com.br/wp-content/uploads/2024/02/Nathalia-narrima.webp"
+                    alt="Sua Renda Em Casa - Natália Narrima">
+                <p><strong><em>Empreendedora</em></strong><br> Empresária e social media, especialista em vendas de
+                    serviços visuais.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: depoimentos -->
+    <section style="background-color: black; color: #ffffff; padding: 50px 20px;">
+        <div class="container" style="text-align: center;">
+            <h2
+                style="text-align: center; font-size: 2rem; margin-bottom: 2rem; text-transform: uppercase; background: linear-gradient(to right, #ff4500, #ffd700); -webkit-background-clip: text; color: transparent;">
+                O que a mídia fala do marketing digital e de nós</h2>
+            <div class="videos-container">
+                <iframe src="https://www.youtube.com/embed/m2POK9C6MYw" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/94vv40py55I" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="videos-container">
+                <iframe src="https://www.youtube.com/embed/uHZW96gjU2k" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/I8OAvaDnVI4" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <!-- Botão de ação -->
+            <a href="https://pay.kiwify.com.br/sUqnazH?afid=zRLalql4" class="cta-button">Comece agora</a>
+        </div>
+    </section>
+
+    <!-- Section: perguntas frequentes -->
+    <section style="padding: 40px; background-color: #f9f9f9;">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <h2 style="text-align: center; font-size: 2rem; margin-bottom: 20px;">Perguntas Frequentes</h2>
+            <div style="border: 1px solid #ddd; border-radius: 8px;">
+                <div style="border-bottom: 1px solid #ddd; padding: 10px; cursor: pointer;"
+                    onclick="toggleAnswer('faq1')">
+                    <h3 style="margin: 0;">Por onde receberei o curso?</h3>
+                </div>
+                <div id="faq1" class="faq-content" style="display: block; padding: 10px;">
+                    <p>Após realizar sua inscrição, seu acesso será enviado diretamente em seu e-mail cadastrado.</p>
+                </div>
+            </div>
+            <div style="border: 1px solid #ddd; border-radius: 8px; margin-top: 10px;">
+                <div style="border-bottom: 1px solid #ddd; padding: 10px; cursor: pointer;"
+                    onclick="toggleAnswer('faq2')">
+                    <h3 style="margin: 0;">Quais são as formas de pagamento?</h3>
+                </div>
+                <div id="faq2" class="faq-content" style="display: block; padding: 10px;">
+                    <p>Você pode pagar via boleto, pix ou cartão de crédito em até 12x!</p>
+                </div>
+            </div>
+            <div style="border: 1px solid #ddd; border-radius: 8px; margin-top: 10px;">
+                <div style="border-bottom: 1px solid #ddd; padding: 10px; cursor: pointer;"
+                    onclick="toggleAnswer('faq3')">
+                    <h3 style="margin: 0;">E se eu me arrepender?</h3>
+                </div>
+                <div id="faq3" class="faq-content" style="display: block; padding: 10px;">
+                    <p>Em caso de arrependimento, basta nos enviar uma mensagem que devolvemos todo o seu investimento
+                        em até 7 dias após sua compra.</p>
+                </div>
+            </div>
+            <div style="border: 1px solid #ddd; border-radius: 8px; margin-top: 10px;">
+                <div style="border-bottom: 1px solid #ddd; padding: 10px; cursor: pointer;"
+                    onclick="toggleAnswer('faq4')">
+                    <h3 style="margin: 0;">Em quanto tempo terei resultados?</h3>
+                </div>
+                <div id="faq4" class="faq-content" style="display: block; padding: 10px;">
+                    <p>SE VOCÊ NÃO FIZER UMA NOVA RENDA DIGITAL EM 1 MÊS, DEVOLVO SEU DINHEIRO E AINDA TE DOU R$100
+                        REAIS NO PIX</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer style="background-color: #272727; color: #ffffff; text-align: center; padding: 2rem 0;">
+        <div class="container">
+            <div id="copyright">Rodrick Alves 2024 © Todos os direitos</div>
+            <div id="declaracao-de-isencao" style="font-weight: lighter; font-size: small;margin: 2rem 0">
+                <em>
+                    Este site não é afiliado ao Facebook ou a
+                    qualquer entidade do Facebook. Depois que você sair do Facebook, a responsabilidade não é deles e
+                    sim do nosso site. Fazemos todos os esforços para indicar claramente e mostrar todas as provas do
+                    produto e usamos resultados reais. Nós não vendemos o seu e-mail ou qualquer informação para
+                    terceiros. Jamais fazemos nenhum tipo de spam. Se você tiver alguma dúvida, sinta-se à vontade para
+                    usar o link de contato e falar conosco em horário comercial de Segunda a Sextas das 09h00 ás 18h00.
+                    Lemos e respondemos todas as mensagens por ordem de chegada.
+                </em>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleAnswer(id) {
+            var element = document.getElementById(id);
+
+            if (element.classList.contains('open')) {
+                // Se a caixa estiver aberta, fecha-a
+                element.classList.remove('open');
+            } else {
+                // Se a caixa estiver fechada, abre-a
+                element.classList.add('open');
+            }
+        }
+    </script>
+</main>
+
+</html>
