@@ -1,0 +1,9 @@
+Códigos de recuperação da autenticação de dois fatores - https://meuprodutoagora.com (rodzandonadi@gmail.com)
+
+Cada linha de 16 letras e números é um único código de recuperação, com espaços opcionais para a legibilidade. Para usar um código de recuperação, após digitar seu nome de usuário e senha, digite o código como "1234 5678 90AB CDEF" na solicitação do 2FA. Se seu site tiver uma página de acesso personalizada e não mostrar uma solicitação de 2FA, você pode usar o método de um único passo digitando sua senha e o código juntos no campo "senha", como "minhasenha1234 5678 90AB CDEF". Seus códigos de recuperação são:
+
+7747 fa0e f6c9 bd1d
+7ea1 60fd 57c5 74d1
+723a 48ed a2c0 46ed
+de6b 594a 4179 a578
+b54a 0317 1d8d 85c8
